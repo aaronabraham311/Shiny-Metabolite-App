@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\n# This is the user-interface definition of a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n\nlibrary(shiny)\n\nshinyUI(fluidPage(\n\n  # Application title\n  titlePanel(\"L-arginine Metabolite Model\"),\n\n  # Sidebar with a slider input for number of bins\n  sidebarLayout(\n    sidebarPanel(\n      sliderInput(\"Arginine\",\n                  \"Relative L-arginine concentration:\",\n                  min = 0,\n                  max = 1.4,\n                  value = 0.9),\n      sliderInput(\"Ornithine\",\n                  \"Relative ornithine concentration:\",\n                  min = 0,\n                  max = 3.0,\n                  value = 1.15),\n      sliderInput(\"Citrulline\",\n                  \"Relative citrulline concentration:\",\n                  min = 0,\n                  max = 1.6,\n                  value = 0.80),\n      sliderInput(\"Proline\",\n                  \"Relative proline concentration:\",\n                  min = 0,\n                  max = 1.4,\n                  value = 0.9),\n      selectInput(\"algorithm\", \"Choose an algorithm\",\n                  choices = c(\"Decision Tree\", \"K-Nearest Neighbors\", \"Logistic Regression\", \n                              \"Fast & Frugal\", \"Random Forest\", \"Support Vector Machine\", \"Ensemble\"))\n      \n    ),\n\n    # Show percentages/classes for each model\n    mainPanel(\n      p(\"This app will display the percentage chance of a patient developing AD based on the metabolite concentrations\"),\n      h2(\"Results\"),\n      verbatimTextOutput(\"results\")\n    )\n  )\n))\n",
+    "created" : 1517520679353.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3067894029",
+    "id" : "1E5469FC",
+    "lastKnownWriteTime" : 1522686773,
+    "last_content_update" : 1522696346208,
+    "path" : "~/Documents/Science Fair /Grade 11/Shiny App/Shiny App/ui.R",
+    "project_path" : "ui.R",
+    "properties" : {
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

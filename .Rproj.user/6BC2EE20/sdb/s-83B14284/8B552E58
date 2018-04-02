@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "\n# This is the server logic for a Shiny web application.\n# You can find out more about building applications with Shiny here:\n#\n# http://shiny.rstudio.com\n#\n\nlibrary(shiny)\n\nshinyServer(function(input, output) {\n\n  # Including relevant libraries\n  library(caret)\n  library(FFTrees)\n  \n  # Reading models\n  rpartModel <- readRDS(\"loocv_cart.rds\")\n  knnModel <- readRDS(\"loocv_knn.rds\")\n  logModel <- readRDS(\"loocv_log.rds\")\n  fftModel <- readRDS(\"fft_model.rds\")\n  rfModel <- readRDS(\"loocv_rf.rds\")\n  svmModel <- readRDS(\"loocv_svm.RDS\")\n  ensembleModel <- readRDS(\"ensemble.rds\")\n  \n  # Getting input of algorithms\n  algorithmInput <- reactive(input$algorithm)\n  output$results <- renderPrint ({\n    df = data.frame(\n        Arginine = input$Arginine,\n        Citrulline = input$Citrulline,\n        Ornithine = input$Ornithine,\n        Proline = input$Proline ) # Data frame of metabolite values\n    \n    # Predicting based on algorithm\n    if (algorithmInput() == \"Decision Tree\")\n    {\n      pred <- predict(rpartModel, df, type = \"prob\")\n      print(pred)\n    }\n    else if (algorithmInput() == \"K-Nearest Neighbors\")\n    {\n      pred <- predict(knnModel, df)\n      print(pred)\n    }\n    else if (algorithmInput() == \"Logistic Regression\")\n    {\n      pred <- predict(logModel, df, type = \"prob\")\n      print(pred)\n    }\n    else if (algorithmInput() == \"Fast & Frugal\")\n    {\n      pred <- predict(fftModel, df)\n      print(pred)\n    }\n    else if (algorithmInput() == \"Random Forest\")\n    {\n      pred <- predict(rfModel, df, type = \"prob\")\n      print(pred)\n    }\n    else if (algorithmInput() == \"Support Vector Machine\")\n    {\n      pred <- predict(svmModel, df)\n      print(pred)\n    }\n    else if (algorithmInput() == \"Ensemble\")\n    {\n      df$cartPredictions <- predict(rpartModel, df)\n      df$knnPredictions <- predict(knnModel, df)\n      df$logPredictions <- predict(logModel, df)\n      df$rfPredictions <- predict(rfModel, df)\n      df$svmPredictions <- predict(svmModel, df) # Creating predictions for other models\n      \n      \n      pred <- predict(ensembleModel, df, type = \"prob\")\n      print(pred)\n    }\n    else \n    {\n      print(\"Error: No algorithm selected\")\n    }\n  }) \n})\n",
+    "created" : 1517520679572.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3762571915",
+    "id" : "8B552E58",
+    "lastKnownWriteTime" : 1522696305,
+    "last_content_update" : 1522696908418,
+    "path" : "~/Documents/Science Fair /Grade 11/Shiny App/Shiny App/server.R",
+    "project_path" : "server.R",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
